@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.11)
+
+SET (CMAKE_CXX_COMPILER             "/usr/bin/clang++")
+SET (CMAKE_AR      "/usr/bin/llvm-ar")
+SET (CMAKE_LINKER  "/usr/bin/llvm-ld")
+SET (CMAKE_NM      "/usr/bin/llvm-nm")
+SET (CMAKE_OBJDUMP "/usr/bin/llvm-objdump")
+SET (CMAKE_RANLIB  "/usr/bin/llvm-ranlib")
+
+project(example CXX)
+find_package(Threads)
+add_executable(example test.cc) 
+target_link_libraries( example ${CMAKE_THREAD_LIBS_INIT} gtest)
+target_compile_options(example PRIVATE -m64)
+target_compile_options(example PRIVATE -mavx)
+target_compile_options(example PRIVATE -g3)
+target_compile_options(example PRIVATE -std=c++17)
